@@ -1,0 +1,10 @@
+
+{
+  "editor.formatOnSave": true,
+  "emmet.excludeLanguages": ["markdown"],
+
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": false
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode"
+}
