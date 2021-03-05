@@ -1,7 +1,6 @@
 const puppeteer = require("puppeteer");
 const nairabetNormaliser = require("./team-normalizers/nairabet-normalizer.json");
-const fs = require("fs");
-
+const { default: axios } = require("axios");
 class Nairabet {
   constructor() {
     // later fetch from API
@@ -10,23 +9,22 @@ class Nairabet {
         competition: "premier league",
         url: "https://nairabet.com/categories/18871",
       },
-
-      // {
-      //   competition: "la liga",
-      //   url: "https://nairabet.com/categories/18726",
-      // },
-      // {
-      //   competition: "serie a",
-      //   url: "https://nairabet.com/categories/18759",
-      // },
-      // {
-      //   competition: "bundesliga",
-      //   url: "https://nairabet.com/categories/18767",
-      // },
-      // {
-      //   competition: "ligue 1",
-      //   url: "https://nairabet.com/categories/18883",
-      // },
+      {
+        competition: "la liga",
+        url: "https://nairabet.com/categories/18726",
+      },
+      {
+        competition: "serie a",
+        url: "https://nairabet.com/categories/18759",
+      },
+      {
+        competition: "bundesliga",
+        url: "https://nairabet.com/categories/18767",
+      },
+      {
+        competition: "ligue 1",
+        url: "https://nairabet.com/categories/18883",
+      },
     ];
 
     this.payload = { bookmaker: "nairabet", events: [] };
@@ -42,8 +40,15 @@ class Nairabet {
         { competition, data: res },
       ];
     }
-    console.log("aremu, this", this.payload.events[0].data);
-    // use axios send this.payload to Main API
+
+    try {
+      await axios.post(
+        "http://localhost:3001/v1/webhooks/events",
+        this.payload
+      );
+    } catch (e) {
+      console.log(e, "could not send date");
+    }
     await browser.close();
   }
 
@@ -64,7 +69,7 @@ class Nairabet {
             ".eventListPeriodItemPartial .date-time"
           ).textContent;
 
-          [date, kickoff] = dateTime.trim().replace(/ +/g, " ").split(" ");
+          [date, time] = dateTime.trim().replace(/ +/g, " ").split(" ");
 
           let [home, away] = el
             .querySelector(".eventListPeriodItemPartial .event-name")
@@ -91,7 +96,7 @@ class Nairabet {
             .split(" ");
           return {
             date,
-            kickoff,
+            time,
             home_team: homeTeam,
             away_team: awayTeam,
             outcomes: {
