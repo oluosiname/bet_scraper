@@ -1,40 +1,38 @@
-const nairabetNormaliser = require("./team-normalizers/nairabet-normalizer.json");
+const normaliser = require("./team-normalizers/bet9ja-normalizer.json");
 const { default: axios } = require("axios");
 const surfer = require("./surfer");
-class Nairabet {
-  constructor(page) {
-    // later fetch from API
 
+class Bet9ja {
+  constructor(page) {
     this.page = page;
+    // later fetch from API
     this.urls = [
       {
         competition: "premier league",
-        url: "https://nairabet.com/categories/18871",
+        url: "https://web.bet9ja.com/Sport/Odds?EventID=170880",
       },
       {
         competition: "la liga",
-        url: "https://nairabet.com/categories/18726",
+        url: "https://web.bet9ja.com/Sport/Odds?EventID=180928",
       },
       {
         competition: "serie a",
-        url: "https://nairabet.com/categories/18759",
+        url: "https://web.bet9ja.com/Sport/Odds?EventID=167856",
       },
       {
         competition: "bundesliga",
-        url: "https://nairabet.com/categories/18767",
+        url: "https://web.bet9ja.com/Sport/Odds?EventID=180923",
       },
       {
         competition: "ligue 1",
-        url: "https://nairabet.com/categories/18883",
+        url: "https://web.bet9ja.com/Sport/Odds?EventID=950503",
       },
     ];
 
-    this.payload = { bookmaker: "nairabet", events: [] };
+    this.payload = { bookmaker: "bet9ja", events: [] };
   }
 
   async run() {
-    // const browser = await surfer.launch();
-    // const page = await browser.newPage();
     for (const { url, competition } of this.urls) {
       const res = await this.scrape(url);
       this.payload.events = [
@@ -59,21 +57,21 @@ class Nairabet {
     await this.page.goto(url, {
       waitUntil: "networkidle2",
     });
-    await this.page.waitForSelector(".eventListLeagueEventsListPartial");
+    await this.page.waitForSelector(".SEs");
 
     let data = await this.page.$$eval(
-      ".single-event",
+      ".item",
       (events, normalizer) => {
         return events.map((el) => {
-          const e = {};
-          const dateTime = el.querySelector(
-            ".eventListPeriodItemPartial .date-time"
-          ).textContent;
-
-          [date, time] = dateTime.trim().replace(/ +/g, " ").split(" ");
+          const dateTime = el.querySelector(".Time").textContent;
+          const [time, ...date] = dateTime
+            .replace(/\n/g, "")
+            .trim()
+            .replace(/ +/g, " ")
+            .split(" ");
 
           let [home, away] = el
-            .querySelector(".eventListPeriodItemPartial .event-name")
+            .querySelector(".Event")
             .textContent.split(" - ");
 
           homeTeam = normalizer[home];
@@ -90,14 +88,18 @@ class Nairabet {
             return;
           }
 
-          const [home_odds, draw_odds, away_odds] = el
-            .querySelector(".eventListPeriodItemPartial .game")
-            .textContent.trim()
-            .replace(/ +/g, " ")
-            .split(" ");
+          const [
+            home_odds_element,
+            draw_odds_element,
+            away_odds_element,
+          ] = el.querySelectorAll(".odds .odd div:last-child");
+          home_odds = home_odds_element.textContent;
+          draw_odds = draw_odds_element.textContent;
+          away_odds = away_odds_element.textContent;
+
           return {
-            date,
-            time,
+            date: date.join(" "),
+            time: time,
             home_team: homeTeam,
             away_team: awayTeam,
             outcomes: {
@@ -108,11 +110,11 @@ class Nairabet {
           };
         });
       },
-      nairabetNormaliser
+      normaliser
     );
 
     return data;
   }
 }
 
-module.exports = Nairabet;
+module.exports = Bet9ja;
