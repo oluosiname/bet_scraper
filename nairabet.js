@@ -44,7 +44,7 @@ class Nairabet {
 
     const SHARED_SECRET =
       process.env.NODE_ENV === "production"
-        ? SHARED_SECRET_PRODUCTION
+        ? process.env.SHARED_SECRET_PRODUCTION
         : process.env.SHARED_SECRET;
 
     const hash = CryptoJS.HmacSHA256(
