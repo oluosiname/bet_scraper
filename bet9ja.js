@@ -1,10 +1,11 @@
 const normaliser = require("./team-normalizers/bet9ja-normalizer.json");
 const { default: axios } = require("axios");
-const surfer = require("./surfer");
+const CryptoJS = require("crypto-js");
 
 class Bet9ja {
-  constructor(page) {
+  constructor(page, apiUrl) {
     this.page = page;
+    this.apiUrl = apiUrl;
     // later fetch from API
     this.urls = [
       {
@@ -41,11 +42,18 @@ class Bet9ja {
       ];
     }
 
+    const hash = CryptoJS.HmacSHA256(
+      JSON.stringify(this.payload),
+      process.env.SHARED_SECRET
+    );
+    const hashInBase64 = CryptoJS.enc.Base64.stringify(hash);
+
     try {
-      await axios.post(
-        "http://localhost:3001/v1/webhooks/events",
-        this.payload
-      );
+      await axios.post(this.apiUrl, this.payload, {
+        headers: {
+          "X-Authorization-Content-SHA256": hashInBase64,
+        },
+      });
     } catch (e) {
       console.log(e, "could not send date");
     }

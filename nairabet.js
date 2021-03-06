@@ -1,11 +1,12 @@
 const nairabetNormaliser = require("./team-normalizers/nairabet-normalizer.json");
 const { default: axios } = require("axios");
-const surfer = require("./surfer");
+const CryptoJS = require("crypto-js");
 class Nairabet {
-  constructor(page) {
+  constructor(page, apiUrl) {
     // later fetch from API
 
     this.page = page;
+    this.apiUrl = apiUrl;
     this.urls = [
       {
         competition: "premier league",
@@ -33,8 +34,6 @@ class Nairabet {
   }
 
   async run() {
-    // const browser = await surfer.launch();
-    // const page = await browser.newPage();
     for (const { url, competition } of this.urls) {
       const res = await this.scrape(url);
       this.payload.events = [
@@ -43,13 +42,20 @@ class Nairabet {
       ];
     }
 
+    const hash = CryptoJS.HmacSHA256(
+      JSON.stringify(this.payload),
+      process.env.SHARED_SECRET
+    );
+    const hashInBase64 = CryptoJS.enc.Base64.stringify(hash);
+
     try {
-      await axios.post(
-        "http://localhost:3001/v1/webhooks/events",
-        this.payload
-      );
+      await axios.post(this.apiUrl, this.payload, {
+        headers: {
+          "X-Authorization-Content-SHA256": hashInBase64,
+        },
+      });
     } catch (e) {
-      console.log(e, "could not send date");
+      console.log(e.response.status, e.response.statusText, "En error occured");
     }
   }
 
