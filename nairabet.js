@@ -42,9 +42,14 @@ class Nairabet {
       ];
     }
 
+    const SHARED_SECRET =
+      process.env.NODE_ENV === "production"
+        ? SHARED_SECRET_PRODUCTION
+        : process.env.SHARED_SECRET;
+
     const hash = CryptoJS.HmacSHA256(
       JSON.stringify(this.payload),
-      process.env.SHARED_SECRET
+      SHARED_SECRET
     );
     const hashInBase64 = CryptoJS.enc.Base64.stringify(hash);
 
