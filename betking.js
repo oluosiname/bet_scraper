@@ -12,16 +12,16 @@ class Betking {
         url:
           "https://www.betking.com/sports/s/event/p/soccer/england/eng-premier-league/0/0",
       },
-      // {
-      //   competition: "la liga",
-      //   url:
-      //     "https://www.betking.com/sports/s/event/p/soccer/spain/esp-laliga/0/0",
-      // },
-      // {
-      //   competition: "serie a",
-      //   url:
-      //     "https://www.betking.com/sports/s/event/p/soccer/italy/ita-serie-a/0/0",
-      // },
+      {
+        competition: "la liga",
+        url:
+          "https://www.betking.com/sports/s/event/p/soccer/spain/esp-laliga/0/0",
+      },
+      {
+        competition: "serie a",
+        url:
+          "https://www.betking.com/sports/s/event/p/soccer/italy/ita-serie-a/0/0",
+      },
       // {
       //   competition: "bundesliga",
       //   url:
