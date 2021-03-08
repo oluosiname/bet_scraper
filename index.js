@@ -4,9 +4,7 @@ const dotenv = require("dotenv");
 
 dotenv.config();
 
-const BOOKMAKERS = ["bet9ja", "nairabet"];
-
-const API_URL = `${config[process.env.NODE_ENV]["apiUrl"]}/webhooks/events`;
+const BOOKMAKERS = ["bet9ja", "nairabet", "betking"];
 
 const run = async () => {
   const browser = await surfer.launch();
@@ -14,7 +12,7 @@ const run = async () => {
 
   for (const bookmaker of BOOKMAKERS) {
     const Bookmaker = require(`./${bookmaker}`);
-    let bookmakerScraper = new Bookmaker(page, API_URL);
+    let bookmakerScraper = new Bookmaker(page);
     await bookmakerScraper.run();
   }
 

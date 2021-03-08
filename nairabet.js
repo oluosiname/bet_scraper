@@ -1,12 +1,10 @@
 const nairabetNormaliser = require("./team-normalizers/nairabet-normalizer.json");
-const { default: axios } = require("axios");
-const CryptoJS = require("crypto-js");
+const post = require("./post");
 class Nairabet {
-  constructor(page, apiUrl) {
+  constructor(page) {
     // later fetch from API
 
     this.page = page;
-    this.apiUrl = apiUrl;
     this.urls = [
       {
         competition: "premier league",
@@ -42,25 +40,10 @@ class Nairabet {
       ];
     }
 
-    const SHARED_SECRET =
-      process.env.NODE_ENV === "production"
-        ? process.env.SHARED_SECRET_PRODUCTION
-        : process.env.SHARED_SECRET;
-
-    const hash = CryptoJS.HmacSHA256(
-      JSON.stringify(this.payload),
-      SHARED_SECRET
-    );
-    const hashInBase64 = CryptoJS.enc.Base64.stringify(hash);
-
     try {
-      await axios.post(this.apiUrl, this.payload, {
-        headers: {
-          "X-Authorization-Content-SHA256": hashInBase64,
-        },
-      });
+      post(this.payload);
     } catch (e) {
-      console.log(e.response.status, e.response.statusText, "En error occured");
+      console.log(e);
     }
   }
 

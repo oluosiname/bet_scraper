@@ -1,11 +1,9 @@
 const normaliser = require("./team-normalizers/bet9ja-normalizer.json");
-const { default: axios } = require("axios");
-const CryptoJS = require("crypto-js");
+const post = require("./post");
 
 class Bet9ja {
-  constructor(page, apiUrl) {
+  constructor(page) {
     this.page = page;
-    this.apiUrl = apiUrl;
     // later fetch from API
     this.urls = [
       {
@@ -42,25 +40,10 @@ class Bet9ja {
       ];
     }
 
-    const SHARED_SECRET =
-      process.env.NODE_ENV === "production"
-        ? process.env.SHARED_SECRET_PRODUCTION
-        : process.env.SHARED_SECRET;
-
-    const hash = CryptoJS.HmacSHA256(
-      JSON.stringify(this.payload),
-      SHARED_SECRET
-    );
-    const hashInBase64 = CryptoJS.enc.Base64.stringify(hash);
-
     try {
-      await axios.post(this.apiUrl, this.payload, {
-        headers: {
-          "X-Authorization-Content-SHA256": hashInBase64,
-        },
-      });
+      post(this.payload);
     } catch (e) {
-      console.log(e, "could not send date");
+      console.log(e);
     }
   }
 
