@@ -22,16 +22,16 @@ class Betking {
         url:
           "https://www.betking.com/sports/s/event/p/soccer/italy/ita-serie-a/0/0",
       },
-      // {
-      //   competition: "bundesliga",
-      //   url:
-      //     "https://www.betking.com/sports/s/event/p/soccer/germany/ger-bundesliga/0/0",
-      // },
-      // {
-      //   competition: "ligue 1",
-      //   url:
-      //     "https://www.betking.com/sports/s/event/p/soccer/france/fra-ligue-1/0/0",
-      // },
+      {
+        competition: "bundesliga",
+        url:
+          "https://www.betking.com/sports/s/event/p/soccer/germany/ger-bundesliga/0/0",
+      },
+      {
+        competition: "ligue 1",
+        url:
+          "https://www.betking.com/sports/s/event/p/soccer/france/fra-ligue-1/0/0",
+      },
     ];
 
     this.payload = { bookmaker: "betking", events: [] };
