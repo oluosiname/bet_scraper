@@ -4,7 +4,7 @@ const dotenv = require("dotenv");
 
 dotenv.config();
 
-const BOOKMAKERS = ["bet9ja", "nairabet", "betking"];
+const BOOKMAKERS = ["sportybet", "bet9ja", "nairabet", "betking"];
 
 const run = async () => {
   const browser = await surfer.launch();

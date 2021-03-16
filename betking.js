@@ -128,18 +128,6 @@ class Betking {
               },
             ];
           });
-
-          // return {
-          //   date,
-          //   time,
-          //   home_team: homeTeam,
-          //   away_team: awayTeam,
-          //   outcomes: {
-          //     home_odds,
-          //     draw_odds,
-          //     away_odds,
-          //   },
-          // };
         });
         return a;
       },
