@@ -1,8 +1,17 @@
-const puppeteer = require("puppeteer");
+// const puppeteer = require("puppeteer"); // Development
+const chromium = require("chrome-aws-lambda");
 
 class Surfer {
   async launch() {
-    return await puppeteer.launch({ headless: false });
+    // return await puppeteer.launch({ headless: false }); Development
+
+    await chromium.puppeteer.launch({
+      args: chromium.args,
+      defaultViewport: chromium.defaultViewport,
+      executablePath: await chromium.executablePath,
+      headless: chromium.headless,
+      ignoreHTTPSErrors: true,
+    });
   }
 }
 

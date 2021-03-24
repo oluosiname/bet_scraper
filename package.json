@@ -12,10 +12,14 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.21.1",
+    "chrome-aws-lambda": "^8.0.0",
     "crypto": "^1.0.1",
     "crypto-js": "^4.0.0",
     "dotenv": "^8.2.0",
-    "puppeteer": "^8.0.0",
+    "puppeteer-core": "^8.0.0",
     "raw-body": "^2.4.1"
+  },
+  "devDependencies": {
+    "puppeteer": "^8.0.0"
   }
 }
