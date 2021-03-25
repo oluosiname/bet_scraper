@@ -44,6 +44,7 @@ class Sportybet {
       const missing = res
         .filter((r) => r.missingTranslations)
         .map((m) => m.missingTranslations.join(" "));
+
       this.missingTranslations = [...this.missingTranslations, ...missing];
 
       this.payload.events = [
@@ -58,7 +59,6 @@ class Sportybet {
         teams: this.missingTranslations,
       });
     }
-
     try {
       post(this.payload);
     } catch (e) {
@@ -100,8 +100,8 @@ class Sportybet {
             const draw_odds = draw_odds_el.textContent;
             const away_odds = away_odds_el.textContent;
 
-            homeTeam = normalizer[home] || "none";
-            awayTeam = normalizer[away] || "test";
+            homeTeam = normalizer[home];
+            awayTeam = normalizer[away];
             if (!homeTeam) {
               missingTranslations = [...missingTranslations, home];
             }
