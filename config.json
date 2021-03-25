@@ -1,6 +1,6 @@
 {
   "production": {
-    "apiUrl": "https://odds234.herokuapp.com/v1"
+    "apiUrl": "https://odds234-production.herokuapp.com/v1"
   },
   "development": {
     "apiUrl": "http://localhost:3001/v1"
