@@ -1,5 +1,6 @@
 const normaliser = require("./team-normalizers/bet9ja-normalizer.json");
 const post = require("./post");
+const { default: rollbar } = require("./rollbar");
 
 class Bet9ja {
   constructor(page) {
@@ -29,21 +30,34 @@ class Bet9ja {
     ];
 
     this.payload = { bookmaker: "bet9ja", events: [] };
+    this.missingTranslations = [];
   }
 
   async run() {
     for (const { url, competition } of this.urls) {
       const res = await this.scrape(url);
+      const missing = res
+        .filter((r) => r.missingTranslations)
+        .map((m) => m.missingTranslations.join(" "));
+      this.missingTranslations = [...this.missingTranslations, ...missing];
+
       this.payload.events = [
         ...this.payload.events,
         { competition, data: res },
       ];
     }
 
+    if (this.missingTranslations.length > 0) {
+      rollbar.warn("Translation Missing", {
+        bookmaker: "bet9ja",
+        teams: this.missingTranslations,
+      });
+    }
+
     try {
       post(this.payload);
     } catch (e) {
-      console.log(e);
+      rollbar.error(e);
     }
   }
 
@@ -59,6 +73,7 @@ class Bet9ja {
       ".item",
       (events, normalizer) => {
         return events.map((el) => {
+          let missingTranslations = [];
           const dateTime = el.querySelector(".Time").textContent;
           const [time, ...date] = dateTime
             .replace(/\n/g, "")
@@ -73,15 +88,16 @@ class Bet9ja {
           homeTeam = normalizer[home];
           awayTeam = normalizer[away];
           if (!homeTeam) {
-            // send error to sentry
-            return;
+            missingTranslations = [...missingTranslations, home];
           }
           if (!awayTeam) {
-            // team: away,
-            //   // message: "Missing translation",
-            //   bookmaker: this.payload.bookmaker,
-            // send error to sentry
-            return;
+            missingTranslations = [...missingTranslations, away];
+          }
+
+          if (!awayTeam || !homeTeam) {
+            return {
+              missingTranslations,
+            };
           }
 
           const [

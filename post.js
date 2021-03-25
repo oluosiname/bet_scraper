@@ -1,14 +1,11 @@
 const { default: axios } = require("axios");
 const CryptoJS = require("crypto-js");
 const config = require("./config.json");
+const { default: rollbar } = require("./rollbar");
 
 const API_URL = `${config[process.env.NODE_ENV]["apiUrl"]}/webhooks/events`;
 
 const post = async (payload) => {
-  // const SHARED_SECRET =
-  //   process.env.NODE_ENV === "production"
-  //     ? process.env.SHARED_SECRET_PRODUCTION
-  //     : process.env.SHARED_SECRET;
   const SHARED_SECRET = process.env.SHARED_SECRET;
 
   const hash = CryptoJS.HmacSHA256(JSON.stringify(payload), SHARED_SECRET);
@@ -21,7 +18,7 @@ const post = async (payload) => {
       },
     });
   } catch (e) {
-    console.log(e.response.status, e.response.statusText, "En error occured");
+    rollbar.error(e);
     throw e;
   }
 };

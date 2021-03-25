@@ -1,5 +1,7 @@
 const nairabetNormaliser = require("./team-normalizers/nairabet-normalizer.json");
 const post = require("./post");
+const { default: rollbar } = require("./rollbar");
+
 class Nairabet {
   constructor(page) {
     // later fetch from API
@@ -29,21 +31,34 @@ class Nairabet {
     ];
 
     this.payload = { bookmaker: "nairabet", events: [] };
+    this.missingTranslations = [];
   }
 
   async run() {
     for (const { url, competition } of this.urls) {
       const res = await this.scrape(url);
+      const missing = res
+        .filter((r) => r.missingTranslations)
+        .map((m) => m.missingTranslations.join(" "));
+      this.missingTranslations = [...this.missingTranslations, ...missing];
+
       this.payload.events = [
         ...this.payload.events,
-        { competition, data: res },
+        { competition, data: res.filter((r) => !r.missingTranslations) },
       ];
+    }
+
+    if (this.missingTranslations.length > 0) {
+      rollbar.warn("Translation Missing", {
+        bookmaker: "nairabet",
+        teams: this.missingTranslations,
+      });
     }
 
     try {
       post(this.payload);
     } catch (e) {
-      console.log(e);
+      rollbar.error(e);
     }
   }
 
@@ -59,6 +74,7 @@ class Nairabet {
       ".single-event",
       (events, normalizer) => {
         return events.map((el) => {
+          let missingTranslations = [];
           const e = {};
           const dateTime = el.querySelector(
             ".eventListPeriodItemPartial .date-time"
@@ -73,15 +89,16 @@ class Nairabet {
           homeTeam = normalizer[home];
           awayTeam = normalizer[away];
           if (!homeTeam) {
-            // send error to sentry
-            return;
+            missingTranslations = [...missingTranslations, home];
           }
           if (!awayTeam) {
-            // team: away,
-            //   // message: "Missing translation",
-            //   bookmaker: this.payload.bookmaker,
-            // send error to sentry
-            return;
+            missingTranslations = [...missingTranslations, away];
+          }
+
+          if (!awayTeam || !homeTeam) {
+            return {
+              missingTranslations,
+            };
           }
 
           const [home_odds, draw_odds, away_odds] = el

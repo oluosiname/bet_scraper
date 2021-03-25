@@ -1,5 +1,6 @@
 const betkingNormaliser = require("./team-normalizers/betking-normalizer.json");
 const post = require("./post");
+const { default: rollbar } = require("./rollbar");
 
 class Betking {
   constructor(page) {
@@ -35,11 +36,17 @@ class Betking {
     ];
 
     this.payload = { bookmaker: "betking", events: [] };
+    this.missingTranslations = [];
   }
 
   async run() {
     for (const { url, competition } of this.urls) {
       const res = await this.scrape(url);
+
+      const missing = res
+        .filter((r) => r.missingTranslations)
+        .map((m) => m.missingTranslations.join(" "));
+      this.missingTranslations = [...this.missingTranslations, ...missing];
 
       this.payload.events = [
         ...this.payload.events,
@@ -47,10 +54,17 @@ class Betking {
       ];
     }
 
+    if (this.missingTranslations.length > 0) {
+      rollbar.warn("Translation Missing", {
+        bookmaker: "betking",
+        teams: this.missingTranslations,
+      });
+    }
+
     try {
       post(this.payload);
     } catch (e) {
-      console.log(e);
+      rollbar.error(e);
     }
   }
 
@@ -78,6 +92,7 @@ class Betking {
         let a = [];
         elements.forEach((el) => {
           let date;
+          let missingTranslations = [];
           const dateElement = el.querySelector("tr .dateRow");
           if (dateElement) {
             date = dateElement.textContent;
@@ -96,15 +111,10 @@ class Betking {
             homeTeam = normalizer[home];
             awayTeam = normalizer[away];
             if (!homeTeam) {
-              // send error to sentry
-              return;
+              missingTranslations = [...missingTranslations, home];
             }
             if (!awayTeam) {
-              // team: away,
-              //   // message: "Missing translation",
-              //   bookmaker: this.payload.bookmaker,
-              // send error to sentry
-              return;
+              missingTranslations = [...missingTranslations, away];
             }
 
             const oddsElements = r.querySelectorAll(".oddItem");
@@ -113,20 +123,24 @@ class Betking {
             const draw_odds = oddsElements[1].textContent.trim();
             const away_odds = oddsElements[2].textContent.trim();
 
-            a = [
-              ...a,
-              {
-                date,
-                time,
-                home_team: homeTeam,
-                away_team: awayTeam,
-                outcomes: {
-                  home_odds,
-                  draw_odds,
-                  away_odds,
+            if (!awayTeam || !homeTeam) {
+              a = [...a, { missingTranslations }];
+            } else {
+              a = [
+                ...a,
+                {
+                  date,
+                  time,
+                  home_team: homeTeam,
+                  away_team: awayTeam,
+                  outcomes: {
+                    home_odds,
+                    draw_odds,
+                    away_odds,
+                  },
                 },
-              },
-            ];
+              ];
+            }
           });
         });
         return a;
