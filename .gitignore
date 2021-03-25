@@ -2,3 +2,4 @@
 .env
 uploader.rb
 scrapper.zip
+deploy.rb

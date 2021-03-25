@@ -64,7 +64,6 @@
 
   "Schalke": "Schalke 04",
   "Mainz": "Mainz 05",
-
   "Bayer Leverkusen": "Bayer Leverkusen",
   "Hoffenheim": "Hoffenheim",
   "Wolfsburg": "Wolfsburg",
@@ -72,7 +71,11 @@
   "Leipzig": "RB Leipzig",
   "Eintracht Frankfurt": "Eintracht Frankfurt",
   "Stuttgart ": "Stuttgart",
-
+  "Bayern M.": "Bayern Munich",
+  "Stuttgart": "Stuttgart",
+  "Hertha": "Hertha BSC",
+  "B. Monchengladbach": "Monchengladbach",
+  "Union Berlin": "Union Berlin",
   "Augsburg": "Augsburg",
   "B. Dortmund": "Borussia Dortmund",
   "Cologne": "FC Koln",
