@@ -1,6 +1,7 @@
 /node_modules
 .env
 uploader.rb
+image_uploader.rb
 scrapper.zip
 deploy.rb
 response.json

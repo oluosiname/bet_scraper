@@ -32,6 +32,16 @@ class Sportybet {
         url:
           "https://www.sportybet.com/ng/sport/football/sr:category:7/sr:tournament:34",
       },
+      {
+        competition: "champions league",
+        url:
+          "https://www.sportybet.com/ng/sport/football/sr:category:393/sr:tournament:7",
+      },
+      {
+        competition: "europa league",
+        url:
+          "https://www.sportybet.com/ng/sport/football/sr:category:393/sr:tournament:679",
+      },
     ];
 
     this.payload = { bookmaker: "sportybet", events: [] };

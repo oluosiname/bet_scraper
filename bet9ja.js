@@ -27,6 +27,14 @@ class Bet9ja {
         competition: "ligue 1",
         url: "https://web.bet9ja.com/Sport/Odds?EventID=950503",
       },
+      {
+        competition: "champions league",
+        url: "https://web.bet9ja.com/Sport/Odds?EventID=1185641",
+      },
+      {
+        competition: "europa league",
+        url: "https://web.bet9ja.com/Sport/Odds?EventID=993923",
+      },
     ];
 
     this.payload = { bookmaker: "bet9ja", events: [] };

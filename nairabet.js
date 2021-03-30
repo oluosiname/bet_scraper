@@ -28,6 +28,14 @@ class Nairabet {
         competition: "ligue 1",
         url: "https://nairabet.com/categories/18883",
       },
+      {
+        competition: "champions league",
+        url: "https://nairabet.com/categories/18727",
+      },
+      {
+        competition: "europa league",
+        url: "https://nairabet.com/categories/18749",
+      },
     ];
 
     this.payload = { bookmaker: "nairabet", events: [] };
