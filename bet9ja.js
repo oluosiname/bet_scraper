@@ -33,7 +33,7 @@ class Bet9ja {
       },
       {
         competition: "europa league",
-        url: "https://web.bet9ja.com/Sport/Odds?EventID=993923",
+        url: "https://web.bet9ja.com/Sport/Odds?EventID=1185689",
       },
     ];
 

@@ -108,5 +108,7 @@
     "LOSC Lille",
     "PSG",
     "Nantes"
-  ]
+  ],
+
+  "europe": ["FC Porto", "Ajax", "Slavia Prague", "Dinamo Zagreb"]
 }

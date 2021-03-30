@@ -101,5 +101,10 @@
   "Lille": "LOSC Lille",
   "Dijon": "Dijon FCO",
   "Lyon": "Olympique Lyonnais",
-  "Marseille": "Olympique Marseille"
+  "Marseille": "Olympique Marseille",
+
+  "Porto": "FC Porto",
+  "Ajax": "Ajax",
+  "Slavia Prague": "Slavia Prague",
+  "Dinamo Zagreb": "Dinamo Zagreb"
 }

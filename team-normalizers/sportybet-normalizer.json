@@ -33,6 +33,7 @@
   "Genoa": "Genoa",
   "Fiorentina": "Fiorentina",
   "Hellas Verona": "Hellas Verona",
+  "Verona": "Hellas Verona",
   "AC Milan": "AC Milan",
   "FC Crotone": "Crotone",
   "Torino": "Torino",
@@ -101,5 +102,10 @@
   "Monaco": "AS Monaco",
   "Lille": "LOSC Lille",
   "PSG": "PSG",
-  "Nantes": "Nantes"
+  "Nantes": "Nantes",
+
+  "FC Porto": "FC Porto",
+  "Ajax": "Ajax",
+  "SK Slavia Prague": "Slavia Prague",
+  "GNK Dinamo Zagreb": "Dinamo Zagreb"
 }
