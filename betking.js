@@ -43,6 +43,16 @@ class Betking {
         url:
           "https://www.betking.com/sports/s/event/p/soccer/europa-l/uefa-europa-league/0/0",
       },
+      {
+        competition: "eredivisie",
+        url:
+          "https://www.betking.com/sports/s/event/p/soccer/netherlands/ned-eredivisie/0/0",
+      },
+      {
+        competition: "primeira liga",
+        url:
+          "https://www.betking.com/sports/s/event/p/soccer/portugal/por-primeira-liga/0/0",
+      },
     ];
 
     this.payload = { bookmaker: "betking", events: [] };

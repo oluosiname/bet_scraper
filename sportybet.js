@@ -42,6 +42,16 @@ class Sportybet {
         url:
           "https://www.sportybet.com/ng/sport/football/sr:category:393/sr:tournament:679",
       },
+      {
+        competition: "eredivisie",
+        url:
+          "https://www.sportybet.com/ng/sport/football/sr:category:35/sr:tournament:37",
+      },
+      {
+        competition: "primeira liga",
+        url:
+          "https://www.sportybet.com/ng/sport/football/sr:category:44/sr:tournament:238",
+      },
     ];
 
     this.payload = { bookmaker: "sportybet", events: [] };

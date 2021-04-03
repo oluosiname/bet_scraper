@@ -36,6 +36,18 @@ class Nairabet {
         competition: "europa league",
         url: "https://nairabet.com/categories/18749",
       },
+      {
+        competition: "eredivisie",
+        url: "https://nairabet.com/categories/18732",
+      },
+      {
+        competition: "primeira liga",
+        url: "https://nairabet.com/categories/18955",
+      },
+      // {
+      //   competition: "first division a",
+      //   url: "https://nairabet.com/categories/18910",
+      // },
     ];
 
     this.payload = { bookmaker: "nairabet", events: [] };

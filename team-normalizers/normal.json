@@ -110,5 +110,45 @@
     "Nantes"
   ],
 
-  "europe": ["FC Porto", "Ajax", "Slavia Prague", "Dinamo Zagreb"]
+  "netherlands": [
+    "VVV Venlo",
+    "FC Groningen",
+    "Willem II",
+    "AZ Alkmaar",
+    "FC Twente",
+    "Vitesse Arnhem",
+    "Sparta Rotterdam",
+    "PEC Zwolle",
+    "Feyenoord",
+    "Fortuna Sittard",
+    "PSV Eindhoven",
+    "Heracles Almelo",
+    "ADO Den Haag",
+    "FC Utrecht",
+    "Heerenveen",
+    "Ajax",
+    "FC Emmen",
+    "RKC Waalwijk"
+  ],
+
+  "portugal": [
+    "Nacional",
+    "Portimonense",
+    "Rio Ave",
+    "Gil Vicente",
+    "FC Porto",
+    "Santa Clara",
+    "Belenenses SAD",
+    "Boavista FC",
+    "Vitoria Guimarares",
+    "CD Tondela",
+    "FC Famalicao",
+    "Pacos de Ferreira",
+    "Sporting Farense",
+    "SC Braga",
+    "Moreirense FC",
+    "Sporting CP"
+  ],
+
+  "europe": ["FC Porto", "Slavia Prague", "Dinamo Zagreb"]
 }

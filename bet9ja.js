@@ -35,6 +35,14 @@ class Bet9ja {
         competition: "europa league",
         url: "https://web.bet9ja.com/Sport/Odds?EventID=1185689",
       },
+      {
+        competition: "eredivisie",
+        url: "https://web.bet9ja.com/Sport/Odds?EventID=1016657",
+      },
+      {
+        competition: "primeira liga",
+        url: "https://web.bet9ja.com/Sport/Odds?EventID=180967",
+      },
     ];
 
     this.payload = { bookmaker: "bet9ja", events: [] };
