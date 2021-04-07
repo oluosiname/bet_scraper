@@ -44,10 +44,10 @@ class Nairabet {
         competition: "primeira liga",
         url: "https://nairabet.com/categories/18955",
       },
-      // {
-      //   competition: "first division a",
-      //   url: "https://nairabet.com/categories/18910",
-      // },
+      {
+        competition: "belgium first division a",
+        url: "https://nairabet.com/categories/18910",
+      },
     ];
 
     this.payload = { bookmaker: "nairabet", events: [] };

@@ -43,6 +43,11 @@ class Bet9ja {
         competition: "primeira liga",
         url: "https://web.bet9ja.com/Sport/Odds?EventID=180967",
       },
+
+      {
+        competition: "belgium first division a",
+        url: "https://web.bet9ja.com/Sport/Odds?EventID=958370",
+      },
     ];
 
     this.payload = { bookmaker: "bet9ja", events: [] };

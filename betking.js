@@ -53,6 +53,11 @@ class Betking {
         url:
           "https://www.betking.com/sports/s/event/p/soccer/portugal/por-primeira-liga/0/0",
       },
+      {
+        competition: "belgium first division a",
+        url:
+          "https://www.betking.com/sports/s/event/p/soccer/belgium/bel-first-division-a/0/0",
+      },
     ];
 
     this.payload = { bookmaker: "betking", events: [] };

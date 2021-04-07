@@ -52,6 +52,11 @@ class Sportybet {
         url:
           "https://www.sportybet.com/ng/sport/football/sr:category:44/sr:tournament:238",
       },
+      {
+        competition: "belgium first division a",
+        url:
+          "https://www.sportybet.com/ng/sport/football/sr:category:33/sr:tournament:38",
+      },
     ];
 
     this.payload = { bookmaker: "sportybet", events: [] };

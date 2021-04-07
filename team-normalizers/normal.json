@@ -150,5 +150,26 @@
     "Sporting CP"
   ],
 
-  "europe": ["FC Porto", "Slavia Prague", "Dinamo Zagreb"]
+  "europe": ["FC Porto", "Slavia Prague", "Dinamo Zagreb"],
+
+  "belgium": [
+    "Royal Charleroi",
+    "Standard Liege",
+    "OH Leuven",
+    "Zulte Waregem",
+    "St. Truidense",
+    "KV Kortrijk",
+    "Club Brugge",
+    "Oostende",
+    "Royal Antwerp",
+    "Beerschot",
+    "KAS Eupen",
+    "Cercle Brugge",
+    "KV Mechelen",
+    "Gent",
+    "Genk",
+    "Waasland-Beveren",
+    "Anderlecht",
+    "Royal Excel Mouscron"
+  ]
 }
