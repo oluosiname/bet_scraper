@@ -7,51 +7,51 @@ class Sportybet {
     this.page = page;
     // later fetch from API
     this.urls = [
-      {
-        competition: "premier league",
-        url:
-          "https://www.sportybet.com/ng/sport/football/sr:category:1/sr:tournament:17",
-      },
-      {
-        competition: "la liga",
-        url:
-          "https://www.sportybet.com/ng/sport/football/sr:category:32/sr:tournament:8",
-      },
-      {
-        competition: "serie a",
-        url:
-          "https://www.sportybet.com/ng/sport/football/sr:category:31/sr:tournament:23",
-      },
-      {
-        competition: "bundesliga",
-        url:
-          "https://www.sportybet.com/ng/sport/football/sr:category:30/sr:tournament:35",
-      },
-      {
-        competition: "ligue 1",
-        url:
-          "https://www.sportybet.com/ng/sport/football/sr:category:7/sr:tournament:34",
-      },
-      {
-        competition: "champions league",
-        url:
-          "https://www.sportybet.com/ng/sport/football/sr:category:393/sr:tournament:7",
-      },
-      {
-        competition: "europa league",
-        url:
-          "https://www.sportybet.com/ng/sport/football/sr:category:393/sr:tournament:679",
-      },
-      {
-        competition: "eredivisie",
-        url:
-          "https://www.sportybet.com/ng/sport/football/sr:category:35/sr:tournament:37",
-      },
-      {
-        competition: "primeira liga",
-        url:
-          "https://www.sportybet.com/ng/sport/football/sr:category:44/sr:tournament:238",
-      },
+      // {
+      //   competition: "premier league",
+      //   url:
+      //     "https://www.sportybet.com/ng/sport/football/sr:category:1/sr:tournament:17",
+      // },
+      // {
+      //   competition: "la liga",
+      //   url:
+      //     "https://www.sportybet.com/ng/sport/football/sr:category:32/sr:tournament:8",
+      // },
+      // {
+      //   competition: "serie a",
+      //   url:
+      //     "https://www.sportybet.com/ng/sport/football/sr:category:31/sr:tournament:23",
+      // },
+      // {
+      //   competition: "bundesliga",
+      //   url:
+      //     "https://www.sportybet.com/ng/sport/football/sr:category:30/sr:tournament:35",
+      // },
+      // {
+      //   competition: "ligue 1",
+      //   url:
+      //     "https://www.sportybet.com/ng/sport/football/sr:category:7/sr:tournament:34",
+      // },
+      // {
+      //   competition: "champions league",
+      //   url:
+      //     "https://www.sportybet.com/ng/sport/football/sr:category:393/sr:tournament:7",
+      // },
+      // {
+      //   competition: "europa league",
+      //   url:
+      //     "https://www.sportybet.com/ng/sport/football/sr:category:393/sr:tournament:679",
+      // },
+      // {
+      //   competition: "eredivisie",
+      //   url:
+      //     "https://www.sportybet.com/ng/sport/football/sr:category:35/sr:tournament:37",
+      // },
+      // {
+      //   competition: "primeira liga",
+      //   url:
+      //     "https://www.sportybet.com/ng/sport/football/sr:category:44/sr:tournament:238",
+      // },
       {
         competition: "belgium first division a",
         url:
