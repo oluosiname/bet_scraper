@@ -48,6 +48,14 @@ class Nairabet {
         competition: "belgium first division a",
         url: "https://nairabet.com/categories/18910",
       },
+      {
+        competition: "russia premier league",
+        url: "https://nairabet.com/categories/18795",
+      },
+      {
+        competition: "scotland premiership",
+        url: "https://nairabet.com/categories/18916",
+      },
     ];
 
     this.payload = { bookmaker: "nairabet", events: [] };

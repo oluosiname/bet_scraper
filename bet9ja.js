@@ -48,6 +48,18 @@ class Bet9ja {
         competition: "belgium first division a",
         url: "https://web.bet9ja.com/Sport/Odds?EventID=958370",
       },
+      {
+        competition: "russia premier league",
+        url: "https://web.bet9ja.com/Sport/Odds?EventID=192011",
+      },
+      {
+        competition: "scotland premiership",
+        url: "https://web.bet9ja.com/Sport/Odds?EventID=1382919",
+      },
+      {
+        competition: "scotland premiership",
+        url: "https://web.bet9ja.com/Sport/Odds?EventID=1382919",
+      },
     ];
 
     this.payload = { bookmaker: "bet9ja", events: [] };

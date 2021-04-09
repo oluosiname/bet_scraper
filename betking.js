@@ -58,6 +58,21 @@ class Betking {
         url:
           "https://www.betking.com/sports/s/event/p/soccer/belgium/bel-first-division-a/0/0",
       },
+      {
+        competition: "russia premier league",
+        url:
+          "https://www.betking.com/sports/s/event/p/soccer/russia/rus-premier-league/0/0",
+      },
+      {
+        competition: "scotland premiership",
+        url:
+          "https://www.betking.com/sports/s/event/p/soccer/scotland/sco-premiership-championship-round/0/0",
+      },
+      {
+        competition: "scotland premiership",
+        url:
+          "https://www.betking.com/sports/s/event/p/soccer/scotland/sco-premiership-relegation-round/0/0",
+      },
     ];
 
     this.payload = { bookmaker: "betking", events: [] };
