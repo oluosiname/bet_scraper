@@ -56,6 +56,10 @@ class Nairabet {
         competition: "scotland premiership",
         url: "https://nairabet.com/categories/18916",
       },
+      {
+        competition: "turkey super lig",
+        url: "https://nairabet.com/categories/18922",
+      },
     ];
 
     this.payload = { bookmaker: "nairabet", events: [] };
@@ -64,7 +68,15 @@ class Nairabet {
 
   async run() {
     for (const { url, competition } of this.urls) {
-      const res = await this.scrape(url);
+      let res;
+      try {
+        res = await this.scrape(url);
+      } catch (e) {
+        console.log(e);
+        rollbar.error(`ScrapingError::Nairabet ${e.message} ${competition}`);
+        continue;
+      }
+
       const missing = res
         .filter((r) => r.missingTranslations)
         .map((m) => m.missingTranslations.join(" "));

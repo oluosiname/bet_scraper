@@ -46,7 +46,8 @@ class Bet9ja {
 
       {
         competition: "belgium first division a",
-        url: "https://web.bet9ja.com/Sport/Odds?EventID=958370",
+        // url: "https://web.bet9ja.com/Sport/Odds?EventID=958370",
+        url: "https://web.bet9ja.com/Sport/Odds?EventID=1382919",
       },
       {
         competition: "russia premier league",
@@ -60,6 +61,10 @@ class Bet9ja {
         competition: "scotland premiership",
         url: "https://web.bet9ja.com/Sport/Odds?EventID=1382919",
       },
+      {
+        competition: "turkey super lig",
+        url: "https://web.bet9ja.com/Sport/Odds?EventID=180956",
+      },
     ];
 
     this.payload = { bookmaker: "bet9ja", events: [] };
@@ -68,7 +73,15 @@ class Bet9ja {
 
   async run() {
     for (const { url, competition } of this.urls) {
-      const res = await this.scrape(url);
+      let res;
+      try {
+        res = await this.scrape(url);
+      } catch (e) {
+        console.log(e);
+        rollbar.error(`ScrapingError::Bet9ja" ${e.message} ${competition}`);
+        continue;
+      }
+
       const missing = res
         .filter((r) => r.missingTranslations)
         .map((m) => m.missingTranslations.join(" "));

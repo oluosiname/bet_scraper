@@ -67,6 +67,11 @@ class Sportybet {
         url:
           "https://www.sportybet.com/ng/sport/football/sr:category:22/sr:tournament:36",
       },
+      {
+        competition: "turkey super lig",
+        url:
+          "https://www.sportybet.com/ng/sport/football/sr:category:46/sr:tournament:52",
+      },
     ];
 
     this.payload = { bookmaker: "sportybet", events: [] };
@@ -75,7 +80,15 @@ class Sportybet {
 
   async run() {
     for (const { url, competition } of this.urls) {
-      const res = await this.scrape(url);
+      let res;
+      try {
+        res = await this.scrape(url);
+      } catch (e) {
+        console.log(e);
+        rollbar.error(`ScrapingError::SportyBet ${e.message} ${competition}`);
+        continue;
+      }
+
       const missing = res
         .filter((r) => r.missingTranslations)
         .map((m) => m.missingTranslations.join(" "));

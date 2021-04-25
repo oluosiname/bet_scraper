@@ -53,10 +53,20 @@ class Betking {
         url:
           "https://www.betking.com/sports/s/event/p/soccer/portugal/por-primeira-liga/0/0",
       },
+      // {
+      //   competition: "belgium first division a",
+      //   url:
+      //     "https://www.betking.com/sports/s/event/p/soccer/belgium/bel-first-division-a/0/0",
+      // },
       {
         competition: "belgium first division a",
         url:
-          "https://www.betking.com/sports/s/event/p/soccer/belgium/bel-first-division-a/0/0",
+          "https://www.betking.com/sports/s/event/p/soccer/belgium/bel-first-division-a-championship-round/0/0",
+      },
+      {
+        competition: "belgium first division a",
+        url:
+          "https://www.betking.com/sports/s/event/p/soccer/belgium/bel-first-division-a-conference-league-playoffs/0/0",
       },
       {
         competition: "russia premier league",
@@ -73,6 +83,11 @@ class Betking {
         url:
           "https://www.betking.com/sports/s/event/p/soccer/scotland/sco-premiership-relegation-round/0/0",
       },
+      {
+        competition: "turkey super lig",
+        url:
+          "https://www.betking.com/sports/s/event/p/soccer/turkey/tur-s-per-lig/0/0",
+      },
     ];
 
     this.payload = { bookmaker: "betking", events: [] };
@@ -81,7 +96,13 @@ class Betking {
 
   async run() {
     for (const { url, competition } of this.urls) {
-      const res = await this.scrape(url);
+      let res;
+      try {
+        res = await this.scrape(url);
+      } catch (e) {
+        rollbar.error(`ScrapingError::Betking" ${e.message} ${competition}`);
+        continue;
+      }
 
       const missing = res
         .filter((r) => r.missingTranslations)
